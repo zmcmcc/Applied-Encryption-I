@@ -72,7 +72,7 @@ def decrypt_file():
     letters = list(line)
 
     #in this loop, try every key from 1-25
-    for key in range(1,25):
+    for key in range(1,26):
         text = []
 
         #decrypt every letter with the key
