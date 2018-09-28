@@ -66,26 +66,25 @@ def onetimePad():
     letters = list(plaintext)
     file.close()
 
+
     #if the plaintext is English, do the one-time pad encryption
     if detectEnglish(plaintext):
+        text = []
         for i in range(len(plaintext)):
-            text = []
-            for letter in letters:
+            #identify whether the letter is lower or upper-case
+            if letters[i] in lower:
+                num = lower.index(letters[i])
+                num = num + int(key_list[i]) # use the ith key
+                num = num % 26
+                letters[i] = lower[num]
+            elif letters[i] in caps:
+                num = caps.index(letters[i])
+                num = num + int(key_list[i]) # use the ith key
+                num = num % 26
+                letters[i] = caps[num]
                 
-                #identify whether the letter is lower or upper-case
-                if letter in lower:
-                    num = lower.index(letter)
-                    num = num + int(key_list[i]) # use the ith key
-                    num = num % 26
-                    letter = lower[num]
-                elif letter in caps:
-                    num = caps.index(letter)
-                    num = num + int(key_list[i]) # use the ith key
-                    num = num % 26
-                    letter = caps[num]
-                
-                #append the shifted letter or the ignored symbol to the text list
-                text.append(letter)
+            #append the shifted letter or the ignored symbol to the text list
+            text.append(letters[i])
             
         # After decrypting all of the letters,
         # join the list text into a single string
@@ -97,32 +96,30 @@ def onetimePad():
         newfile.close()
         
     elif not detectEnglish(plaintext):
+        text = []
         for i in range(len(plaintext)):
-            text = []
-            for letter in letters:
+            #identify whether the letter is lower or upper-case
+            if letters[i] in lower:
+                num = lower.index(letters[i])
+                num = num + 26 - int(key_list[i]) # use the reverse of the ith key
+                num = num % 26
+                letters[i] = lower[num]
+            elif letters[i] in caps:
+                num = caps.index(letters[i])
+                num = num + 26 - int(key_list[i]) # use the reverse of the ith key
+                num = num % 26
+                letters[i] = caps[num]
                 
-                #identify whether the letter is lower or upper-case
-                if letter in lower:
-                    num = lower.index(letter)
-                    num = num + 26 - int(key_list[i]) # use the reverse of the ith key
-                    num = num % 26
-                    letter = lower[num]
-                elif letter in caps:
-                    num = caps.index(letter)
-                    num = num + 26 - int(key_list[i]) # use the reverse of the ith key
-                    num = num % 26
-                    letter = caps[num]
-                
-                #append the shifted letter or the ignored symbol to the text list
-                text.append(letter)
+            #append the shifted letter or the ignored symbol to the text list
+            text.append(letters[i])
             
-            newMessage = ''.join(text)
+        newMessage = ''.join(text)
             
-            #if the decryption is English, write it to a new file
-            if detectEnglish(newMessage):
-                output = open('decryption.txt','w')
-                output.write(newMessage)
-                output.close()
+        #if the decryption is English, write it to a new file
+        if detectEnglish(newMessage):
+            output = open('decryption.txt','w')
+            output.write(newMessage)
+            output.close()
         
 
 #Call the main function
