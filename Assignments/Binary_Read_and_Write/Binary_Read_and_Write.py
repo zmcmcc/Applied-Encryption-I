@@ -15,7 +15,7 @@ def gen_alphabet():
 def detectBinary(message):
     #message_words = message.split()
     for i in range(len(message)):
-        if not message[i] in ['0','1',' ']:
+        if not message[i] in ['0','1',' ','\n']:
             return False
     return True
 
