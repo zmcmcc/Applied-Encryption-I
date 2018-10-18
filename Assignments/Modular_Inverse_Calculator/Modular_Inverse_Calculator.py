@@ -1,19 +1,21 @@
 #This script calculates the inverse of a number g modulo p, where p is prime.
     
 
-def findInverse(g,p):
+def findInverse():
     #read the g and p from input.txt
     with open('input.txt') as text:
         p = int(text.readline())
         g = int(text.readline())
         
     t = p - 2 #t is p-2
-    nums = []# to append g^2^n for n from 1 to some threshold number
+    nums = [g]# to append g^2^n for n from 1 to some threshold number
+    num = g
     i = 1
     res = 1
     
     while(i <= t):
-        nums.append((g**i)%p)
+        num = num**2 % p
+        nums.append(num)
         i = i*2
 
     #turn p-2 into binary and inverse the order 
@@ -28,6 +30,6 @@ def findInverse(g,p):
 
     print("The inverse number of {} modulo {} is: {}.".format(g,p,res))
 
+findInverse()
 
 
-findInverse(11,13)
