@@ -172,3 +172,4 @@ def diffie_hellman():
         
         
 diffie_hellman()
+print(fastPower(22623,23367,23369))
